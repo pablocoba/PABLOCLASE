@@ -1,0 +1,484 @@
+mysql> 
+mysql> /*Exercise 1:
+   /*> 
+   /*> Obtain the city and telephone number of the US offices.*/
+mysql> 
+mysql> select ciudad, telefono from oficinas where pais='EEUU';
++---------------+-----------------+
+| ciudad        | telefono        |
++---------------+-----------------+
+| Boston        | +1 215 837 0825 |
+| San Francisco | +1 650 219 4782 |
++---------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 2:
+   /*> 
+   /*> Obtain the position, name, surname and email of the head of the company.*/
+mysql> 
+mysql> /*forma mala*/
+mysql> select puesto, nombre, apellido1, apellido2, email from empleados where puesto = 'director general';
++------------------+--------+-----------+-----------+----------------------+
+| puesto           | nombre | apellido1 | apellido2 | email                |
++------------------+--------+-----------+-----------+----------------------+
+| Director General | Marcos | Maga¤a    | Perez     | marcos@jardineria.es |
++------------------+--------+-----------+-----------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> /*forma buena*/
+mysql> select puesto, nombre, apellido1, apellido2, email from empleados where codigojefe is null;
++------------------+--------+-----------+-----------+----------------------+
+| puesto           | nombre | apellido1 | apellido2 | email                |
++------------------+--------+-----------+-----------+----------------------+
+| Director General | Marcos | Maga¤a    | Perez     | marcos@jardineria.es |
++------------------+--------+-----------+-----------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 3:
+   /*> 
+   /*> Obtain the first and last name and position of those who are not sales representatives.*/
+mysql> 
+mysql> select nombre, apellido1, apellido2, puesto from empleados where puesto != 'representante ventas';
++----------+------------+-----------+-----------------------+
+| nombre   | apellido1  | apellido2 | puesto                |
++----------+------------+-----------+-----------------------+
+| Marcos   | Maga¤a     | Perez     | Director General      |
+| Ruben    | L¢pez      | Martinez  | Subdirector Marketing |
+| Alberto  | Soria      | Carrasco  | Subdirector Ventas    |
+| Maria    | Sol¡s      | Jerez     | Secretaria            |
+| Carlos   | Soria      | Jimenez   | Director Oficina      |
+| Emmanuel | Maga¤a     | Perez     | Director Oficina      |
+| Francois | Fignon     |           | Director Oficina      |
+| Michael  | Bolton     |           | Director Oficina      |
+| Hilary   | Washington |           | Director Oficina      |
+| Nei      | Nishikori  |           | Director Oficina      |
+| Amy      | Johnson    |           | Director Oficina      |
+| Kevin    | Fallmer    |           | Director Oficina      |
++----------+------------+-----------+-----------------------+
+12 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 4:
+   /*> 
+   /*> Obtain the number of clients the company has.*/
+mysql> 
+mysql> select count(codigocliente) from clientes;
++----------------------+
+| count(codigocliente) |
++----------------------+
+|                   36 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 5:
+   /*> 
+   /*> Obtain the name of Spanish clients.*/
+mysql> 
+mysql> select count(codigocliente) from clientes where pais='spain';
++----------------------+
+| count(codigocliente) |
++----------------------+
+|                   27 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 6:
+   /*> 
+   /*> Obtain how many clients the company has in each country.*/
+mysql> 
+mysql> select pais, count(codigocliente) from clientes group by 1;
++----------------+----------------------+
+| pais           | count(codigocliente) |
++----------------+----------------------+
+| USA            |                    4 |
+| Spain          |                   27 |
+| France         |                    2 |
+| Australia      |                    2 |
+| United Kingdom |                    1 |
++----------------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 7:
+   /*> 
+   /*> Obtain how many clients the company has in the city of Madrid.*/
+mysql> 
+mysql> select ciudad, count(codigocliente) from clientes group by 1 having ciudad='madrid';
++--------+----------------------+
+| ciudad | count(codigocliente) |
++--------+----------------------+
+| Madrid |                   11 |
++--------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 8:
+   /*> 
+   /*> Obtain the employee code and the number of clients each sales representative serves.*/
+mysql> 
+mysql> select codigoEmpleadoRepVentas, count(codigocliente) from clientes group by 1;
++-------------------------+----------------------+
+| codigoEmpleadoRepVentas | count(codigocliente) |
++-------------------------+----------------------+
+|                       5 |                    5 |
+|                       8 |                    4 |
+|                       9 |                    2 |
+|                      11 |                    5 |
+|                      12 |                    5 |
+|                      16 |                    2 |
+|                      18 |                    2 |
+|                      19 |                    2 |
+|                      22 |                    2 |
+|                      30 |                    5 |
+|                      31 |                    2 |
++-------------------------+----------------------+
+11 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 9:
+   /*> 
+   /*> Obtain what was the first and last payment made by the client whose code is 3.*/
+mysql> /*mal hecho*/
+mysql> select codigoCliente, IDtransaccion, Cantidad from pagos where codigoCliente=3 order by Idtransaccion desc limit 1;
++---------------+---------------+----------+
+| codigoCliente | IDtransaccion | Cantidad |
++---------------+---------------+----------+
+|             3 | ak-std-000005 |   926.00 |
++---------------+---------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select codigoCliente, IDtransaccion, Cantidad from pagos where codigoCliente=3 order by Idtransaccion asc limit 1;
++---------------+---------------+----------+
+| codigoCliente | IDtransaccion | Cantidad |
++---------------+---------------+----------+
+|             3 | ak-std-000003 |  5000.00 |
++---------------+---------------+----------+
+1 row in set (0.00 sec)
+
+mysql> /*bien hecho*/
+mysql> select min(fechapago), max(fechapago), codigocliente from pagos where codigocliente=3;
++----------------+----------------+---------------+
+| min(fechapago) | max(fechapago) | codigocliente |
++----------------+----------------+---------------+
+| 2009-01-16     | 2009-02-19     |             3 |
++----------------+----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> /*Exerceise 10:
+   /*> 
+   /*> Obtain the customer code of those customers who made payments in 2008*/
+mysql> 
+mysql> select codigoCliente, fechapago from pagos having fechapago > ('2007-12-31') && fechapago < ('2009-01-01');
++---------------+------------+
+| codigoCliente | fechapago  |
++---------------+------------+
+|             1 | 2008-11-10 |
+|             1 | 2008-12-10 |
+|            13 | 2008-08-04 |
+|            14 | 2008-07-15 |
+|            26 | 2008-03-18 |
++---------------+------------+
+5 rows in set, 1 warning (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 11:
+   /*> 
+   /*> Obtain the different states through which an order can go.*/
+mysql> 
+mysql> select distinct estado from pedidos;
++-----------+
+| estado    |
++-----------+
+| Entregado |
+| Rechazado |
+| Pendiente |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 12:
+   /*> 
+   /*> Obtain the order number, customer code, required date and delivery date of orders that have not been delivered on time.*/
+mysql> 
+mysql> select codigopedido, codigocliente, fechaesperada, fechaentrega, estado from pedidos where estado ="entregado" having fechaentrega>fechaesperada;
++--------------+---------------+---------------+--------------+-----------+
+| codigopedido | codigocliente | fechaesperada | fechaentrega | estado    |
++--------------+---------------+---------------+--------------+-----------+
+|            9 |             1 | 2008-12-27    | 2008-12-28   | Entregado |
+|           13 |             7 | 2009-01-14    | 2009-01-15   | Entregado |
+|           16 |             7 | 2009-01-07    | 2009-01-15   | Entregado |
+|           17 |             7 | 2009-01-09    | 2009-01-11   | Entregado |
+|           18 |             9 | 2009-01-06    | 2009-01-07   | Entregado |
+|           22 |             9 | 2009-01-11    | 2009-01-13   | Entregado |
+|           28 |             3 | 2009-02-17    | 2009-02-20   | Entregado |
+|           32 |             4 | 2007-01-19    | 2007-01-27   | Entregado |
+|           38 |            19 | 2009-03-06    | 2009-03-07   | Entregado |
+|           42 |            19 | 2009-03-23    | 2009-03-27   | Entregado |
+|           45 |            23 | 2009-03-04    | 2009-03-07   | Entregado |
+|           55 |            14 | 2009-01-10    | 2009-01-11   | Entregado |
+|           60 |             1 | 2008-12-27    | 2008-12-28   | Entregado |
+|           68 |             3 | 2009-02-17    | 2009-02-20   | Entregado |
+|           92 |            27 | 2009-04-30    | 2009-05-03   | Entregado |
+|           96 |            35 | 2008-04-12    | 2008-04-13   | Entregado |
+|          114 |            36 | 2009-01-29    | 2009-01-31   | Entregado |
++--------------+---------------+---------------+--------------+-----------+
+17 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 13:
+   /*> 
+   /*> Get how many products exist in each order line.*/
+mysql> //algo as¡, arreglar.
+    -> select distinct numeroLinea, count(codigoproducto) from detallepedidos group by numerolinea;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '//algo as¡, arreglar.
+select distinct numeroLinea, count(codigoproducto) from d' at line 1
+mysql> 
+mysql> /*Ejercicio 14:
+   /*> 
+   /*> Obtener un listado de los 20 c¢digos de productos m s pedidos ordenado por cantidad pedida.*/
+mysql> 
+mysql> select codigoproducto, sum(cantidad) as total from detallepedidos group by 1 order by 2 desc limit 20;
++----------------+-------+
+| codigoproducto | total |
++----------------+-------+
+| AR-009         |   961 |
+| AR-008         |   455 |
+| FR-17          |   423 |
+| AR-006         |   291 |
+| OR-247         |   279 |
+| OR-157         |   262 |
+| OR-227         |   236 |
+| OR-208         |   221 |
+| 30310          |   220 |
+| OR-214         |   212 |
+| FR-57          |   203 |
+| OR-177         |   150 |
+| AR-001         |   135 |
+| FR-11          |   131 |
+| AR-002         |   128 |
+| OR-136         |   127 |
+| FR-48          |   120 |
+| FR-29          |   120 |
+| FR-100         |   114 |
+| FR-94          |   111 |
++----------------+-------+
+20 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 15:
+   /*> 
+   /*> Obtain the order number, customer code, required date and delivery date of orders whose delivery date was at least two days before the required date. (Use addDate function)*/
+mysql> 
+mysql> select codigopedido, codigocliente, fechaesperada, fechaentrega from pedidos where addDate(fechaentrega, interval 2 day) <= fechaesperada order by 1;
++--------------+---------------+---------------+--------------+
+| codigopedido | codigocliente | fechaesperada | fechaentrega |
++--------------+---------------+---------------+--------------+
+|            2 |             5 | 2007-10-28    | 2007-10-26   |
+|           24 |            14 | 2008-07-31    | 2008-07-25   |
+|           30 |            13 | 2008-09-03    | 2008-08-31   |
+|           36 |            14 | 2008-12-15    | 2008-12-10   |
+|           53 |            13 | 2008-11-15    | 2008-11-09   |
+|           89 |            35 | 2007-12-13    | 2007-12-10   |
+|           91 |            27 | 2009-03-29    | 2009-03-27   |
+|           93 |            27 | 2009-05-30    | 2009-05-17   |
++--------------+---------------+---------------+--------------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 16:
+   /*> 
+   /*> Obtain the name, surname, office and position of those who are not sales representatives.*/
+mysql> 
+mysql> select nombre, apellido1, apellido2, codigooficina, puesto from empleados where puesto != 'representante ventas';
++----------+------------+-----------+---------------+-----------------------+
+| nombre   | apellido1  | apellido2 | codigooficina | puesto                |
++----------+------------+-----------+---------------+-----------------------+
+| Marcos   | Maga¤a     | Perez     | TAL-ES        | Director General      |
+| Ruben    | L¢pez      | Martinez  | TAL-ES        | Subdirector Marketing |
+| Alberto  | Soria      | Carrasco  | TAL-ES        | Subdirector Ventas    |
+| Maria    | Sol¡s      | Jerez     | TAL-ES        | Secretaria            |
+| Carlos   | Soria      | Jimenez   | MAD-ES        | Director Oficina      |
+| Emmanuel | Maga¤a     | Perez     | BCN-ES        | Director Oficina      |
+| Francois | Fignon     |           | PAR-FR        | Director Oficina      |
+| Michael  | Bolton     |           | SFC-USA       | Director Oficina      |
+| Hilary   | Washington |           | BOS-USA       | Director Oficina      |
+| Nei      | Nishikori  |           | TOK-JP        | Director Oficina      |
+| Amy      | Johnson    |           | LON-UK        | Director Oficina      |
+| Kevin    | Fallmer    |           | SYD-AU        | Director Oficina      |
++----------+------------+-----------+---------------+-----------------------+
+12 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 17:
+   /*> 
+   /*> Obtain the number of clients assigned to each sales representative.*/
+mysql> 
+mysql> select codigoempleadorepventas as 'Codigo de empleado', count(codigocliente) as 'numero de clientes' from clientes group by 1;
++--------------------+--------------------+
+| Codigo de empleado | numero de clientes |
++--------------------+--------------------+
+|                  5 |                  5 |
+|                  8 |                  4 |
+|                  9 |                  2 |
+|                 11 |                  5 |
+|                 12 |                  5 |
+|                 16 |                  2 |
+|                 18 |                  2 |
+|                 19 |                  2 |
+|                 22 |                  2 |
+|                 30 |                  5 |
+|                 31 |                  2 |
++--------------------+--------------------+
+11 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 18:
+   /*> 
+   /*> Obtain a list with the total price of each order.*/
+mysql> 
+mysql> select codigopedido, sum(preciounidad*cantidad), cantidad, preciounidad from detallepedidos group by 1;
+ERROR 1055 (42000): Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'jardineria.detallepedidos.Cantidad' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> 
+mysql> /*Exercise 19:
+   /*> 
+   /*> Get how many orders each customer has in each state.*/
+mysql> 
+mysql> select codigocliente, count(codigopedido) as  'n§ pedidos', estado from pedidos group by 1,3 order by 1;
++---------------+------------+-----------+
+| codigocliente | n§ pedidos | estado    |
++---------------+------------+-----------+
+|             1 |          5 | Entregado |
+|             1 |          4 | Pendiente |
+|             1 |          2 | Rechazado |
+|             3 |          5 | Entregado |
+|             3 |          2 | Pendiente |
+|             3 |          2 | Rechazado |
+|             4 |          2 | Entregado |
+|             4 |          1 | Pendiente |
+|             4 |          2 | Rechazado |
+|             5 |          2 | Entregado |
+|             5 |          1 | Pendiente |
+|             5 |          2 | Rechazado |
+|             7 |          4 | Entregado |
+|             7 |          1 | Rechazado |
+|             9 |          2 | Entregado |
+|             9 |          2 | Pendiente |
+|             9 |          1 | Rechazado |
+|            13 |          2 | Entregado |
+|            13 |          1 | Pendiente |
+|            13 |          2 | Rechazado |
+|            14 |          3 | Entregado |
+|            14 |          1 | Pendiente |
+|            14 |          1 | Rechazado |
+|            15 |          3 | Entregado |
+|            15 |          1 | Pendiente |
+|            15 |          1 | Rechazado |
+|            16 |          6 | Entregado |
+|            16 |          2 | Pendiente |
+|            16 |          2 | Rechazado |
+|            19 |          3 | Entregado |
+|            19 |          1 | Pendiente |
+|            19 |          1 | Rechazado |
+|            23 |          2 | Entregado |
+|            23 |          2 | Pendiente |
+|            23 |          1 | Rechazado |
+|            26 |          2 | Entregado |
+|            26 |          2 | Pendiente |
+|            27 |          3 | Entregado |
+|            27 |          2 | Pendiente |
+|            28 |          3 | Entregado |
+|            28 |          1 | Pendiente |
+|            28 |          1 | Rechazado |
+|            30 |          4 | Entregado |
+|            30 |          4 | Pendiente |
+|            30 |          2 | Rechazado |
+|            35 |          4 | Entregado |
+|            35 |          1 | Pendiente |
+|            36 |          2 | Entregado |
+|            36 |          2 | Pendiente |
+|            36 |          1 | Rechazado |
+|            38 |          3 | Entregado |
+|            38 |          2 | Rechazado |
++---------------+------------+-----------+
+52 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 20:
+   /*> 
+   /*> Obtain a list with the office, city, region and country code of those offices that are in countries whose name begins with "E".*/
+mysql> 
+mysql> select codigooficina, ciudad, region, pais from oficinas where pais like 'E%';
++---------------+----------------------+-------------------+--------+
+| codigooficina | ciudad               | region            | pais   |
++---------------+----------------------+-------------------+--------+
+| BCN-ES        | Barcelona            | Barcelona         | Espa¤a |
+| BOS-USA       | Boston               | MA                | EEUU   |
+| MAD-ES        | Madrid               | Madrid            | Espa¤a |
+| SFC-USA       | San Francisco        | CA                | EEUU   |
+| TAL-ES        | Talavera de la Reina | Castilla-LaMancha | Espa¤a |
++---------------+----------------------+-------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> /*Exercise 21:
+   /*> 
+   /*> Get the name, range, dimensions, quantity in stock and selling price of the five most expensive products.*/
+mysql> 
+mysql>  select nombre, gama, dimensiones, cantidadEnStock, precioventa from productos order by precioventa desc limit 5;
++-----------------------+--------------+-------------+-----------------+-------------+
+| nombre                | gama         | dimensiones | cantidadEnStock | precioventa |
++-----------------------+--------------+-------------+-----------------+-------------+
+| Trachycarpus Fortunei | Ornamentales | 250-300     |               2 |      462.00 |
+| Bismarckia Nobilis    | Ornamentales | 240 - 260   |               4 |      266.00 |
+| Bismarckia Nobilis    | Ornamentales | 200 - 220   |               4 |      217.00 |
+| Zamia Furfuracaea     | Ornamentales | 90 - 110    |              15 |      168.00 |
+| Brahea Armata         | Ornamentales | 120 - 140   |             100 |      112.00 |
++-----------------------+--------------+-------------+-----------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql>  
+mysql>  /*Exercise 22:
+   /*> 
+   /*> Obtain the code and billing for orders over 2000 euros.*/
+mysql> 
+mysql> select codigopedido, facturaci¢n from 
+    -> 
+    -> /*Exercise 23:
+   /*> 
+   /*> Get a list of products showing total stock, range and supplier.*/
+    -> 
+    -> select cantidadenstock, gama, proveedor from productos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select cantidadenstock, gama, proveedor from productos' at line 5
+mysql> 
+mysql> /*Exercise 24:
+   /*> 
+   /*> Obtain the order number and customer code of those orders whose order date is the same as the delivery date.*/
+mysql> 
+mysql> select count(codigopedido) as pedidos, codigocliente from pedidos where fechaentrega = fechaesperada group by 2;
++---------+---------------+
+| pedidos | codigocliente |
++---------+---------------+
+|       2 |             1 |
+|       1 |             4 |
+|       1 |             5 |
+|       1 |             9 |
+|       1 |            14 |
+|       3 |            15 |
+|       6 |            16 |
+|       1 |            19 |
+|       1 |            23 |
+|       1 |            26 |
+|       2 |            28 |
+|       4 |            30 |
+|       2 |            35 |
+|       1 |            36 |
+|       3 |            38 |
++---------+---------------+
+15 rows in set (0.00 sec)
+
+mysql> notee;

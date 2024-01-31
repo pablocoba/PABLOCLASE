@@ -1,0 +1,46 @@
+#boton{
+    visibility: hidden;
+}
+
+button{
+    padding:10px;
+    margin:10px;
+    font-size:25px;
+
+}
+
+tr,td{
+    border:solid black 3px;
+    width:80px;
+    height:80px;
+    border-collapse:collapse;
+    
+}
+
+.calculator__keys{
+    display:grid;
+    grid-template-columns: repeat(4, 100px);
+    gap:10px;
+}
+
+.key--operator{
+
+}
+
+.key--equal{
+
+}
+
+.calculator__display{
+    grid-row: 1;
+    grid-column:1/4;
+    border: 3px solid black;
+    width:300px;
+    height:70px;
+    text-justify:center;
+}
+
+#res{
+    padding:10px;   
+    visibility:hidden;
+}

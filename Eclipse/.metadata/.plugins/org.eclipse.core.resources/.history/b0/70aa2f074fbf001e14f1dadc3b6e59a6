@@ -1,0 +1,61 @@
+package music;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+public class Nota {
+	
+	private String nota;
+	private ArrayList<Integer> nums = new ArrayList<>();
+	
+	public Nota() {
+		this.nota=generarNota();
+	}
+	
+	public int generarNums() {
+		for (int i = 0; i < this.nums.size(); i++) {
+			nums.add(i+1);
+		}
+	}
+	
+	public String generarNota() {
+		String note = "Do/C";
+		Random rnd = new Random();
+		
+		int num = rnd.nextInt(1,8);
+
+		switch(num) {
+		case 1:
+			note = "Do/C";
+			break;
+		case 2:
+			note = "Re/D";
+			break;
+		case 3:
+			note = "Mi/E";
+			break;
+		case 4:
+			note = "Fa/F";
+			break;
+		case 5:
+			note = "Sol/G";
+			break;
+		case 6:
+			note = "La/A";
+			break;
+		case 7:
+			note = "Si/B";
+			break;
+		default:
+			note = "Do/C";
+			break;
+		}
+		this.nota = note;
+		return note;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nota;
+	}
+}

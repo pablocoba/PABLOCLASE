@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE alumno[
+    
+]>
+<alumnos>
+        <alumno>
+            <nombre>Martín</nombre>
+            <apellidos>Rodríguez Coy</apellidos>
+            <fechaDeNacimiento>01/01/1999</fechaDeNacimiento>
+            <DNI>54454553-R</DNI>
+            <nota>7</nota>
+        </alumno>
+    <alumno>
+            <nombre>Emilia</nombre>
+            <apellidos>López Sánchez</apellidos>
+            <fechaDeNacimiento>10/09/2002</fechaDeNacimiento>
+            <DNI>54454554-S</DNI>
+            <nota>7</nota>
+        </alumno>
+    <alumno>
+            <nombre>Naim</nombre>
+            <apellidos>Abad García</apellidos>
+            <fechaDeNacimiento>27/11/2001</fechaDeNacimiento>
+            <DNI>54454555-T</DNI>
+            <nota>5</nota>
+        </alumno>        
+</alumnos> 

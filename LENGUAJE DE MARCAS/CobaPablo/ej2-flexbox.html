@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ejercicio Flexbox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .container {
+      display: flex;
+      flex-flow:column wrap;
+      background:lightblue;
+      padding:4em;
+    }
+    .grapecrab{
+      display:flex;
+      flex-flow:row nowrap;
+      width:100%;
+      justify-content:center;
+    }
+    img{
+      max-width:90%;
+      max-height:90%;
+      padding:1em 1em .3em 1em;
+    }
+
+    article{
+      display:flex;
+      flex-flow:column nowrap;
+      align-items:center;
+      width:20em;
+      background:darkred;
+      border: solid black 4px;
+    }
+    dt{
+      padding-bottom:1em;
+    }
+    h1{
+				font-size: xx-large;
+			}
+
+    @media screen and (max-width: 700px) {
+      .container{
+        .grapecrab{
+          flex-flow:row wrap;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Ejercicio flexbox. Nombre y apellidos</h1>
+  <main class="container">
+    <section class="grapecrab">
+      <article>
+        <img src="grapes.webp" alt="uvas">
+        <dt>Caja Flex</dt>
+      </article>
+      <article>
+        <img src="grapes.webp" alt="uvas">
+        <dt>Caja Flex</dt>
+      </article>
+      <article>
+        <img src="grapes.webp" alt="uvas">
+        <dt>Caja Flex</dt>
+      </article>
+    </section>
+    <section class="grapecrab">
+      <article>
+        <img src="crab.jpg" alt="cangrejo">
+        <dt>Caja Flex</dt>
+      </article>
+      <article>
+        <img src="crab.jpg" alt="cangrejo">
+        <dt>Caja Flex</dt>
+      </article>
+      <article>
+        <img src="crab.jpg" alt="cangrejo">
+        <dt>Caja Flex</dt>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>
+
+

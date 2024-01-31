@@ -1,0 +1,101 @@
+body {margin:5; padding:0; font: bold 20px; background-color:#cccccc}
+h2 {color: #000; padding: 0px 0px 0px 15 px;}
+h1{text-align:center;}
+
+.menu_h{background-color:orange; margin-bottom:20px;}
+.menu_h li {display:inline; padding:40px; font-size:30px;}
+.menu_h ul{margin-bottom:10px;}
+.menu_h a {
+    float:left; 
+    display: block;
+    margin:3px; 
+    padding:5px; 
+    text-decoration:none;
+    color:#000; 
+    border-top-right-radius:8px; 
+    background-color: #272520;
+}
+.menu_h a:hover {color:#FFF; font-size:1.2em; background-color:#e0e0e0; text-decoration:underline;}
+header{background-color:orange;
+    padding:20px;
+    margin:20px;
+    margin-left:100px;
+    margin-right:100px;
+}
+nav{
+    background-color:orange; 
+    padding:20px;
+    margin:20px;
+    margin-left:100px;
+    margin-right:100px;
+    height:50px;
+}
+section{
+    float:left; 
+    background-color:orange; 
+    margin:20px 0 20px 0;
+    margin-left:100px; 
+    height:539px; 
+    width: 1000px;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom:0;
+}
+article{
+    background-color:yellow;
+    margin-left:20px;
+    margin-right:30px;
+    width:930px;
+    height:430px;
+    text-align:center;
+    position:relative;
+}
+aside{
+    float:right; 
+    background-color:#ffd1e0; 
+    padding:20px;
+    margin:20px 0px 20px 0px;
+    margin-right:100px;
+    height:500px; 
+    width: 570px;
+    text-align: center;
+    font-size: 40px;
+    position:relative;
+    margin-bottom:40px;
+}
+footer{
+    float:inline-end;
+    text-align: center;
+    width:1704px;
+    height:60px;
+    font-size: 30px;
+    margin-left:100px;
+    margin-right:100px;
+
+    background-color: orange;
+    position:relative;
+}
+.sec{
+    padding-top:1%;
+    padding-bottom:1%;
+    margin:0;
+}
+.art{
+    padding-top:20%;
+    margin:0;
+}
+.asi{
+    padding-top:34%;
+}
+.foot{
+    padding-top:1%;
+    margin:0;
+}
+.hola{
+float:left;
+margin-left:3%;
+
+}
+.soundcloud{
+    font-size: 10px; color: #000000;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;
+}

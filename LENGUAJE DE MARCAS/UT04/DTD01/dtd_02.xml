@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE letras [
+<!ELEMENT letras (letra+)> <!--el fallo es que no tiene un + o un *-->
+<!ELEMENT letra (#PCDATA)>
+]>
+<letras>
+<letra>m</letra>
+<letra>uve doble</letra>
+</letras>

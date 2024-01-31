@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libros>
+    <obra>
+        <id>53</id>
+        <nombre>Un detalle menor</nombre>
+        <autor>Adanía Shibli</autor>
+        <precio>
+            <libro>15</libro>
+            <ebook>8</ebook>
+        </precio>
+    </obra>
+    <obra>
+        <id>54</id>
+        <nombre>Amianto</nombre>
+        <autor>Alberto Prunetti </autor>
+        <precio>
+            <libro>18</libro>
+            <ebook>9</ebook>
+        </precio>
+    </obra>    
+    <obra>
+        <id>131</id>
+        <nombre>Tea Rooms</nombre>
+        <autor>Luisa Carnés</autor>
+        <precio>
+            <libro>22</libro>
+            <ebook>10</ebook>
+        </precio>
+    </obra>
+    <obra>
+        <id>133</id>
+        <nombre>La profecía del armadillo</nombre>
+        <autor>Zerocalcare</autor>
+        <precio>
+            <libro>19</libro>
+            <ebook>5</ebook>
+        </precio>
+    </obra>
+</libros>

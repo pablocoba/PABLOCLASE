@@ -1,0 +1,158 @@
+TEE C:/Users/dawmi/Desktop/p/BBDD/jardipcl.txt
+
+DROP DATABASE IF EXISTS JARDIPCL;
+CREATE DATABASE JARDIPCL;
+USE JARDIPCL;
+
+DROP TABLE IF EXISTS GAMASPRODUCTOS;
+CREATE TABLE GAMASPRODUCTOS(
+gama VARCHAR(50) PRIMARY KEY,
+descripcionTexto TEXT,
+descripcionHtml TEXT,
+imagen BLOB
+);
+
+DROP TABLE IF EXISTS PRODUCTOS;
+CREATE TABLE PRODUCTOS(
+codigoProducto VARCHAR(15) PRIMARY KEY,
+nombre VARCHAR(70) NOT NULL,
+gama VARCHAR(50) NOT NULL,
+dimensiones VARCHAR(25),
+proveedor VARCHAR(50),
+descripcion TEXT,
+cantidadEnStock SMALLINT NOT NULL,
+precioVenta DECIMAL(15,2) NOT NULL,
+precioProveedor DECIMAL (15,2),
+FOREIGN KEY (gama) REFERENCES GAMASPRODUCTOS(gama) ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS OFICINAS;
+CREATE TABLE OFICINAS(
+codigoOficina VARCHAR(10) PRIMARY KEY,
+ciudad VARCHAR(30) NOT NULL,
+pais VARCHAR(50) NOT NULL,
+region VARCHAR(50),
+codigoPostal VARCHAR(10) NOT NULL,
+telefono VARCHAR(20) NOT NULL,
+lineaDireccion1 VARCHAR(50) NOT NULL,
+lineaDireccion2 VARCHAR(50)
+);
+
+DROP TABLE IF EXISTS EMPLEADOS;
+CREATE TABLE EMPLEADOS(
+codigoEmpleado INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50) NOT NULL,
+apellido1 VARCHAR(50) NOT NULL,
+apellido2 VARCHAR(50) NOT NULL,
+extension VARCHAR(10) NOT NULL,
+email VARCHAR(100) NOT NULL,
+codigoOficina VARCHAR(10) NOT NULL,
+codigoJefe INT,
+puesto VARCHAR(50),
+FOREIGN KEY (codigoOficina) REFERENCES OFICINAS(codigoOficina) ON UPDATE CASCADE,
+FOREIGN KEY (codigoJefe) REFERENCES EMPLEADOS(codigoEmpleado) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS CLIENTES;
+CREATE TABLE CLIENTES(
+codigoCliente INT AUTO_INCREMENT PRIMARY KEY,
+nombreCliente VARCHAR(50) NOT NULL,
+nombreContacto VARCHAR (30),
+apellidoContato VARCHAR(30),
+telefono VARCHAR(15) NOT NULL,
+fax VARCHAR(15) NOT NULL,
+lineaDireccion1 VARCHAR(50) NOT NULL,
+lineaDireccion2 VARCHAR(50),
+ciudad VARCHAR(50) NOT NULL,
+region VARCHAR(50),
+pais VARCHAR(50),
+codigoPostal VARCHAR(10),
+codigoEmpleadoRepVentas INT,
+limiteCredito DECIMAL (15,2),
+FOREIGN KEY (codigoEmpleadoRepVentas) REFERENCES EMPLEADOS (codigoEmpleado) ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS PEDIDOS;
+CREATE TABLE PEDIDOS(
+codigoPedido INT AUTO_INCREMENT PRIMARY KEY,
+fechaPedido DATE NOT NULL,
+fechaEsperada DATE NOT NULL,
+fechaEntrega DATE,
+estado VARCHAR(15) NOT NULL,
+comentarios TEXT,
+codigoCliente INT NOT NULL,
+FOREIGN KEY (codigoCliente) REFERENCES CLIENTES (codigoCliente) ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS DETALLEPEDIDOS;
+CREATE TABLE DETALLEPEDIDOS(
+codigoPedido INT AUTO_INCREMENT NOT NULL,
+codigoProducto VARCHAR(15) NOT NULL,
+cantidad INT NOT NULL,
+precioUnidad DECIMAL(15,2) NOT NULL,
+numeroLinea SMALLINT NOT NULL,
+FOREIGN KEY (codigoPedido) REFERENCES PEDIDOS(codigoPedido) ON UPDATE CASCADE,
+FOREIGN KEY (codigoProducto) REFERENCES PRODUCTOS(codigoProducto) ON UPDATE CASCADE,
+PRIMARY KEY (codigoPedido, codigoProducto)
+);
+
+DROP TABLE IF EXISTS PAGOS;
+CREATE TABLE PAGOS(
+codigoCliente INT AUTO_INCREMENT NOT NULL,
+formaPago VARCHAR(40) NOT NULL,
+idTransaccion VARCHAR(50) NOT NULL,
+fechaPago DATE NOT NULL,
+cantidad DECIMAL (15,2) NOT NULL,
+PRIMARY KEY (codigoCliente,idTransaccion),
+FOREIGN KEY (codigoCliente) REFERENCES CLIENTES(codigoCliente) ON UPDATE CASCADE
+);
+
+/*CLIENTES*/
+ALTER TABLE CLIENTES CHANGE telefono telefonoMovil VARCHAR(15) NOT NULL;
+ALTER TABLE CLIENTES ADD COLUMN telefonoFijo VARCHAR(15) NOT NULL AFTER TELEFONOMOVIL;
+ALTER TABLE CLIENTES CHANGE lineaDireccion1 direccion1 VARCHAR(50) NOT NULL;
+ALTER TABLE CLIENTES CHANGE lineaDireccion2 direccion2 VARCHAR(50);
+ALTER TABLE CLIENTES ALTER pais SET DEFAULT "spain";
+ALTER TABLE CLIENTES ADD CONSTRAINT CONST_PAIS_CLIENT CHECK (pais IN ("SPAIN","USA","FRANCE","AUSTRALIA","UNITED KINGDOM"));
+
+DROP INDEX IDX_TELEFONOMOVIL ON CLIENTES;
+CREATE INDEX IDX_TELEFONOMOVIL ON CLIENTES (telefonoMovil);
+
+DROP VIEW IF EXISTS V_CLIENTES;
+CREATE VIEW V_CLIENTES AS SELECT pais, nombreCliente, telefonoMovil FROM CLIENTES ORDER BY pais ASC;
+
+/*EMPLEADOS*/
+ALTER TABLE EMPLEADOS ADD COLUMN telefono VARCHAR(15) NOT NULL AFTER apellido2;
+ALTER TABLE EMPLEADOS ADD CONSTRAINT CONST_POS_EMPL CHECK (puesto IN("General Director","Deputy Director of Marketing","Deputy Director of Sales","Secretary","Sales Representative","Office Director"));
+
+DROP VIEW IF EXISTS V_EMPLEADOS;
+CREATE VIEW V_EMPLEADOS AS SELECT apellido1, apellido2, nombre, puesto FROM EMPLEADOS ORDER BY apellido1 ASC;
+
+/*OFICINAS*/
+ALTER TABLE OFICINAS CHANGE lineaDireccion1 direccion1 VARCHAR(50) NOT NULL;
+ALTER TABLE OFICINAS CHANGE lineaDireccion2 direccion2 VARCHAR(50);
+ALTER TABLE OFICINAS ADD CONSTRAINT CONST_LOC_OFI CHECK (pais IN("Spain","USA","England","France","Australia","Japan"));
+DROP VIEW IF EXISTS V_OFICINAS;
+CREATE VIEW V_OFICINAS AS SELECT pais, telefono, direccion1 FROM OFICINAS ORDER BY pais ASC;
+
+/*RENAME TABLE GAMAPRODUCTOS*/
+ALTER TABLE GAMAPRODUCTOS RENAME TO GAMA;
+
+/*USERS*/
+DROP USER IF EXISTS adminPCL;
+CREATE USER adminPCL IDENTIFIED BY "pableras";
+grant all on JARDIPCL.* to adminPCL;
+
+DROP USER IF EXISTS PCL;
+CREATE USER PCL IDENTIFIED BY "1234";
+GRANT SELECT ON JARDIPCL .* TO PCL;
+
+ALTER TABLE EMPLEADOS ADD FOREIGN KEY (puesto) REFERENCES OFICINAS (codigoOficina);
+ALTER TABLE EMPLEADOS DROP FOREIGN KEY empleados_ibfk_3;
+
+select e.nombre, c.nombrecliente from empleados e inner join clientes c on e.Codigoempleado = c.codigoempleadorepventas;
+select e.nombre, c.nombrecliente from empleados e, clientes c where e.codigoempleado=c.codigoempleadorepventas;
+select e.nombre, c.nombrecliente from empleados e left join clientes c on e.Codigoempleado = c.codigoempleadorepventas;
+/*hacer eso pero tmbn con detallepagos, sacando transaccion y cantidad*/
+
+notee;

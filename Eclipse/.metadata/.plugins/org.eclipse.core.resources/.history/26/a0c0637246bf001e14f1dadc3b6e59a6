@@ -1,0 +1,12 @@
+package com.ellago;
+import java.util.*;
+public class Cola {
+	
+	ArrayList<String> list = new ArrayList<>();
+	public void Sacar() {
+		list.remove(0);
+	}
+	public static void Meter(ArrayList<String> list, String cad) {
+		list.add(list.size(), cad);
+	}
+}

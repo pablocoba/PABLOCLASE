@@ -1,0 +1,111 @@
+<!DOCTYPE html><!--Para documentos HTML5-->
+<html lang="en-US"><!--necesario para crear la página, lo del lenguaje es para ayudar a la pagina-->
+  <head><!--la cabecera de la página(la pestaña por lo general)-->
+    <title>tonto el q lo lea</title><!--<title> es lo que sale en la pestaña de la página-->
+    <link rel="stylesheet" href="stylesheet.css"><!--referencia a la hoja de estilos-->
+      <script src="scripts.js"></script>
+  
+  </head>
+  <body><!--para modificar la página en sí, el cuerpo-->
+    <button onclick="alert(product(100,2))">
+      holaa
+    </button>
+    <button onclick="displayDate()">The time is?</button> 
+    <button style="display:block; padding:20px; margin:20px;" onclick="dimeloquetal()">The time is?</button> 
+    <p id="demo"></p>
+    <button onclick="aparecer()">aparece!!!</button>
+    <div id="divi" style="visibility:hidden;">
+      <img styles="max-width:400px" src="tini.jpg">
+      <h2>monito guay</h2>
+    </div>
+    <h1 id="inicio" style="color:darkslategray; font-size:40px; text-align:center; ">My first heading</h1>
+    <h2 style="background-color:rgb(143, 143, 143); text-align:center; ">hola holita</h2>
+    <a href="#poesia">ir a la poesía poesiosa</a><!--usando href podemos ir al ID referido con #-->
+    <h2 style="font-size:30px;">my second heading</h2>
+    <h3>third heading</h3><!--los headings son importantes para estructurar la página-->
+    <h4>fourth</h4>
+    <h5>fifth</h5>
+    <h6>sixth heading</h6> <!--h son headings y van del 1 al 6 cada cual más pequeño-->
+    <a href="https://www.google.es">para entrar a gugel</a> <!-- <a> se usa para links, SIEMPRE CON COMILLAS-->
+    <p>my first paragraph.</p><!--parrafos-->
+    <img src="/tini.jpg" alt="mateo" usemap="#moniti"><!--para poner una imagen hay que escribir todo el directorio, se encuentra en propiedades del archivo si te pierdes-->
+                                                <!--se pueden modificar medidas con width y height-->
+    <map name="moniti">
+      <area shape="rect" coords="50,40, 260,150" href="https://www.leagueoflegends.com/es-es/">
+    </map>
+    <p title="Hola">jajajajaj</p> <!--pa esconder cosas en la pag web x ejemplo o ayudar 8-)-->
+    <p title='comillas simples y "dobles para la palabra dentro", sino no se ven'>Cuando el título contiene una palabra con comillas se deben usar la comilla simple</p>
+    <a id="link1" href="https://www.w3schools.com/" target="_self">LO ABRE EN LA MISMA PAG</a><br>
+    <a id="link1" href="https://www.w3schools.com/" target="_blank">LO ABRE EN NUEVA PAG</a><br>
+    <a id="link1" href="mailto:contact.p4ul@gmail.com">TAMBIÉN SE PUEDEN LINKEAR EMAIL LINKS</a>
+    <button>PULSA SI TAI BAKANO</button> <!--he hecho un boton bakano-->
+    <p>
+      This paragraph
+      contains a lot of lines
+      in the source code,
+      but the browser
+      ignores it.
+      </p>
+      <p>
+        This paragraph<br>
+        contains a lot of lines<br>
+        in the source code,<br>
+        but the browser<br> <!--así se pondría para meter cambios de línea-->
+        ignores it.
+        </p>
+      <hr style=""> <!--esto hace una línea horrible-->
+      <br><!--esto hace un salto de página-->
+      <p>
+        This paragraph
+        contains         a lot of spaces
+        in the source         code,
+        but the        browser
+        ignores it.
+      </p>
+      <pre id="poesia"><!--creamos un id para asignarle cositas-->
+        My Bonnie lies over the ocean. <!--con el pre tenemos texto ya con estilo preformado-->
+                                       <!--en este caso creo que el default es así como d poesía-->
+        My Bonnie lies over the sea.
+
+        My Bonnie lies over the ocean.
+
+        Oh, bring back my Bonnie to me.
+      </pre>
+      <q>Holis</q><!--para quotations cortas-->
+      <p>The <abbr style="text-decoration: none;" title="World Health Organization">WHO</abbr> was founded in 1948.</p><!--para abreviaciones que aparecen si hovereas el ratón-->
+      <address>
+        Written by John Doe.<br>
+        Visit us at:<br>
+        Example.com<br>
+        Box 564, Disneyland<br>
+        USA
+        </address><!--para direcciones e información-->
+        <p><cite>The Scream</cite> by Edvard Munch. Painted in 1893.</p> <!--aquí el cite hace que el texto se enfatice un poco-->
+        <bdo dir="rtl">This text will be written from right to left</bdo><!--para escribirlo al revés xD-->
+        <a href="#inicio"><button class="botoncin" >SUBIIIIIR</button></a>
+        <br><br><br>
+        <table id="tabla1">
+          <caption2 style="padding:5px; background-color: rgb(172, 146, 46);">se pueden poner más??? sí se puede pero se jode un poco el padding</caption2>
+          <caption style="padding:5px; background-color: cornsilk;">QUÉ ES ESTOOOOOOOOOOOO!!!! ah vale va justo encima de la columna</caption>          
+          <tr><!--columnas-->
+            <th>holi</th><!--TH son titulos de columnas-->
+            <th>adios</th>
+            <th>jajajaja</th>
+            <th>JÓJÓJÓJÓ</th>
+          </tr>
+          <tr>
+            <td>nose</td><!--celdas-->
+            <td>nada</td>
+            <td>ya basta</td>
+            <td>basta ya</td>
+          </tr>
+          <tr>
+            <td>esto qué es otra columna?</td>
+            <td><button style="background-color: brown; border-radius:5px;">aquí te meto un botón ahora qué</button></td>
+            <td>un poco tedioso esto de hacer tablas</td>
+            <td>jejejejej</td>
+          </tr>
+        </table>
+  </body>                                     
+
+</html>

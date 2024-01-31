@@ -1,0 +1,8 @@
+<!ELEMENT correo (destinatarios, de, asunto, mensaje)>
+<!ELEMENT destinatarios (to*,cc*,cco*)>
+<!ELEMENT de (#PCDATA)>
+<!ELEMENT asunto (#PCDATA)>
+<!ELEMENT mensaje (#PCDATA)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT cc (#PCDATA)>
+<!ELEMENT cco (#PCDATA)>

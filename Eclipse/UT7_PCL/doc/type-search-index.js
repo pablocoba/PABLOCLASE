@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.ellago","l":"Ampliacion"},{"p":"com.ellago","l":"Array"},{"p":"com.ellago","l":"Frecursivas"},{"p":"com.ellago","l":"Main"},{"p":"com.ellago","l":"Persona"}];updateSearchResults();

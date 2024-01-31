@@ -1,0 +1,26 @@
+{"libros":[
+    {
+        "id":"53",
+        "nombre": "Un detalle menor",
+        "autor": "Adanía Shibli",
+        "Precio":[{"libro": "15", "ebook": "8"}]
+    },
+    {
+        "id":"54",
+        "nombre": "Amianto",
+        "autor": "Alberto Prunetti",
+        "Precio":[{"libro": "18", "ebook": "9"}]
+    },
+    {
+        "id":"131",
+        "nombre": "Tea Rooms",
+        "autor": "Luisa Carnés",
+        "Precio":[{"libro": "22", "ebook": "10"}]
+    },
+    {
+        "id":"133",
+        "nombre": "La profecía del armadillo",
+        "autor": "Zerocalcare",
+        "Precio":[{"libro": "19", "ebook": "5"}]
+    }
+]}

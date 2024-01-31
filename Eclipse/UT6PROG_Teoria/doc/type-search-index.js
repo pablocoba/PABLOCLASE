@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"matematicas","l":"Geometria"},{"p":"matematicas","l":"Varias"}];updateSearchResults();

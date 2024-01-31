@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<elemento>
+    <ave id="1">
+        <nombreComun>lavandera blanca</nombreComun>
+        <nombreCientifico>Motacilla alba</nombreCientifico>
+        <tipoEstancia>Residente</tipoEstancia>
+        <avistamiento>Asociada a ríos y arroyos. Zonas abiertas de espacios verdes, en época invernal</avistamiento>
+    </ave>
+    <ave id="2">
+        <nombreComun>Autillo europeo</nombreComun>
+        <nombreCientifico>Otus scops</nombreCientifico>
+        <tipoEstancia>Estival</tipoEstancia>
+        <avistamiento>Nocturna. Habita arboledas frescas de riberas y jardines. Anida en nidos de otras especies</avistamiento>
+    </ave>
+    <ave id="3">
+        <nombreComun>Garza real</nombreComun>
+        <nombreCientifico>Ardea cinerea</nombreCientifico>
+        <tipoEstancia>Invernante</tipoEstancia>
+        <avistamiento>Acecha inmóvil a los peces en agua somera</avistamiento>
+    </ave>
+    <ave id="4">
+        <nombreComun>Cotorra argentina</nombreComun>
+        <nombreCientifico>Myopsitta monachus</nombreCientifico>
+        <tipoEstancia>Residente</tipoEstancia>
+        <avistamiento>Gran cantidad de parques y espacios verdes madrileños</avistamiento>
+    </ave>
+    <ave id="5">
+        <nombreComun>Mosquitero papialbo</nombreComun>
+        <nombreCientifico>Phylloscopus bonelli</nombreCientifico>
+        <tipoEstancia>En paso migratorio</tipoEstancia>
+        <avistamiento>Se puede ver en la migración primaveral en grandes espacios verdes arbolados como la Casa
+de Campo</avistamiento>
+    </ave>
+</elemento>
+
+

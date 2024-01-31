@@ -1,0 +1,5 @@
+package com.ellago;
+import java.util.*;
+public class Cola {
+	
+}

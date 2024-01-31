@@ -1,0 +1,222 @@
+html, body{
+    height:100%;
+}
+
+h1{ font-size:60px; 
+    text-align:center;
+    font-family:'M PLUS Code Latin', sans-serif; 
+    font-weight:700;
+}
+
+h2{font-size: 37px; 
+        font-family: 'M PLUS Code Latin', sans-serif; 
+        font-weight:600;
+}
+    
+h3{font-size:26px; 
+        font-family: 'M PLUS Code Latin', sans-serif; 
+        font-weight:500;
+}
+    
+h4{font-size:24px; 
+        font-family: 'M PLUS Code Latin', sans-serif; 
+        font-weight:500;
+        text-align:center;
+}
+li{
+    font-family: 'M PLUS Code Latin', sans-serif; 
+    font-weight:500;
+    font-size:22px;
+    min-width:5px;
+}
+p{ 
+    font-family: 'M PLUS Code Latin', sans-serif; 
+    font-weight:400;
+    font-size:17px;
+    min-width:5px;
+}
+
+body{
+    background-color:#e9d1ff;
+    margin:0;
+    height:100%;
+}
+
+#botoncin{
+    border-radius:50%;
+    background-color:rgb(192, 129, 255);
+    border:none;    
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+#botoncin:hover{
+    border-radius:50%;
+    background-color:rgb(221, 187, 255);
+    border:none;
+    cursor:pointer;   
+}
+
+.lin{
+    position:relative;
+    display:flex;
+    margin-left:640px;
+    width:50px;
+    height:50px;
+}
+.lin2{
+    display:flex;
+    width:50px;
+    height:50px;
+    margin-left:50px;
+    margin-top:10px;
+    margin-bottom:30px;
+}
+
+#arrow{
+    object-fit:cover;
+    width:30px;
+    padding:10px;
+
+}
+
+table{
+    font-family: 'M PLUS Code Latin', sans-serif; 
+    width:100%;
+    border-collapse: collapse;
+    text-align:center;
+    
+}
+th{
+    border-bottom:1px solid #ab9cca;
+    padding:16px;
+    font-size:30px; 
+}
+td{
+    font-size:24px;
+    font-weight:400;
+    padding:8px;
+    border-bottom:1px solid #ab9cca;
+}
+tr:nth-child(odd) {background-color:#d1bbff;}
+tr:nth-child(even) {background-color:#e7dbff;}
+
+.padretabla{    
+    margin:auto;
+
+    height:100%;
+}
+
+.tabla1{
+    position:relative;
+    height:100%;
+
+}
+
+#head{
+    margin-top:0px;
+    padding-top:30px;
+}
+
+.center_frame{
+    height:100%;
+    background-color:#fff;
+    width:60%;
+    margin:auto;
+    padding-bottom:20px;
+    height:100%;
+}
+
+.pafoto{
+    width:100%;
+}
+
+.fotosvj{
+    object-fit:cover;
+    width:330px;
+    height:200px; 
+    position:relative; 
+    float:left; 
+    margin:15px;
+    margin-left:0px;
+    margin-right:30px;
+}
+.fotoslug{
+    object-fit:cover;
+    width:330px;
+    height:200px; 
+    position:relative; 
+    margin:15px;
+    margin-bottom:30px;
+    margin-left:0px;
+    margin-right:20px;
+    float:inline-start;
+}
+
+.ajustes{
+    padding-left:50px;
+    padding-right:50px;   
+    text-align:justify;
+    margin:auto;
+    height:100%;
+    
+}
+
+.datosp{
+    padding:50px;
+    padding-left:50px;
+    padding-right:50px;   
+    text-align:justify;
+}
+
+.datosp img{
+    width:100%;
+    max-width:31.413612565445025vh;
+    position:relative;
+    float:right;
+    margin-left:30px;
+}
+
+.datosp_txt{
+    width:55%;
+}
+
+.aptitudes{
+    margin:auto;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;     
+}
+
+.apt1{
+    width:29%;
+    margin:auto;
+    padding-right:7px;
+    padding-left:7px;
+    margin-right:8px;
+    margin-left:8px;
+    position:relative;
+    display:block;
+    float:inline-start;
+    height:100%;
+}
+
+.tabhead{
+    text-align: center;
+    font-size: 30px;
+    font-weight:600;
+}
+
+.lista{
+    margin:auto;
+    float:left;
+    margin-bottom:20px;
+    height:100%;
+}
+.listalug{
+    margin:auto;
+    margin-bottom:20px;
+    position:relative;
+    height:100%;
+}

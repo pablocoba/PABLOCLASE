@@ -1,0 +1,255 @@
+mysql> DROP DATABASE IF EXISTS JARDIPCL;
+Query OK, 11 rows affected (0.04 sec)
+
+mysql> CREATE DATABASE JARDIPCL;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE JARDIPCL;
+Database changed
+mysql> 
+mysql> DROP TABLE IF EXISTS GAMASPRODUCTOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE GAMASPRODUCTOS(
+    -> gama VARCHAR(50) PRIMARY KEY,
+    -> descripcionTexto TEXT,
+    -> descripcionHtml TEXT,
+    -> imagen BLOB
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS PRODUCTOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE PRODUCTOS(
+    -> codigoProducto VARCHAR(15) PRIMARY KEY,
+    -> nombre VARCHAR(70) NOT NULL,
+    -> gama VARCHAR(50) NOT NULL,
+    -> dimensiones VARCHAR(25),
+    -> proveedor VARCHAR(50),
+    -> descripcion TEXT,
+    -> cantidadEnStock SMALLINT NOT NULL,
+    -> precioVenta DECIMAL(15,2) NOT NULL,
+    -> precioProveedor DECIMAL (15,2),
+    -> FOREIGN KEY (gama) REFERENCES GAMASPRODUCTOS(gama) ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS OFICINAS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE OFICINAS(
+    -> codigoOficina VARCHAR(10) PRIMARY KEY,
+    -> ciudad VARCHAR(30) NOT NULL,
+    -> pais VARCHAR(50) NOT NULL,
+    -> region VARCHAR(50),
+    -> codigoPostal VARCHAR(10) NOT NULL,
+    -> telefono VARCHAR(20) NOT NULL,
+    -> lineaDireccion1 VARCHAR(50) NOT NULL,
+    -> lineaDireccion2 VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS EMPLEADOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE EMPLEADOS(
+    -> codigoEmpleado INT AUTO_INCREMENT PRIMARY KEY,
+    -> nombre VARCHAR(50) NOT NULL,
+    -> apellido1 VARCHAR(50) NOT NULL,
+    -> apellido2 VARCHAR(50) NOT NULL,
+    -> extension VARCHAR(10) NOT NULL,
+    -> email VARCHAR(100) NOT NULL,
+    -> codigoOficina VARCHAR(10) NOT NULL,
+    -> codigoJefe INT,
+    -> puesto VARCHAR(50),
+    -> FOREIGN KEY (codigoOficina) REFERENCES OFICINAS(codigoOficina) ON UPDATE CASCADE,
+    -> FOREIGN KEY (codigoJefe) REFERENCES EMPLEADOS(codigoEmpleado) ON DELETE SET NULL ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS CLIENTES;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE CLIENTES(
+    -> codigoCliente INT AUTO_INCREMENT PRIMARY KEY,
+    -> nombreCliente VARCHAR(50) NOT NULL,
+    -> nombreContacto VARCHAR (30),
+    -> apellidoContato VARCHAR(30),
+    -> telefono VARCHAR(15) NOT NULL,
+    -> fax VARCHAR(15) NOT NULL,
+    -> lineaDireccion1 VARCHAR(50) NOT NULL,
+    -> lineaDireccion2 VARCHAR(50),
+    -> ciudad VARCHAR(50) NOT NULL,
+    -> region VARCHAR(50),
+    -> pais VARCHAR(50),
+    -> codigoPostal VARCHAR(10),
+    -> codigoEmpleadoRepVentas INT,
+    -> limiteCredito DECIMAL (15,2),
+    -> FOREIGN KEY (codigoEmpleadoRepVentas) REFERENCES EMPLEADOS (codigoEmpleado) ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS PEDIDOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE PEDIDOS(
+    -> codigoPedido INT AUTO_INCREMENT PRIMARY KEY,
+    -> fechaPedido DATE NOT NULL,
+    -> fechaEsperada DATE NOT NULL,
+    -> fechaEntrega DATE,
+    -> estado VARCHAR(15) NOT NULL,
+    -> comentarios TEXT,
+    -> codigoCliente INT NOT NULL,
+    -> FOREIGN KEY (codigoCliente) REFERENCES CLIENTES (codigoCliente) ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS DETALLEPEDIDOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE DETALLEPEDIDOS(
+    -> codigoPedido INT AUTO_INCREMENT NOT NULL,
+    -> codigoProducto VARCHAR(15) NOT NULL,
+    -> cantidad INT NOT NULL,
+    -> precioUnidad DECIMAL(15,2) NOT NULL,
+    -> numeroLinea SMALLINT NOT NULL,
+    -> FOREIGN KEY (codigoPedido) REFERENCES PEDIDOS(codigoPedido) ON UPDATE CASCADE,
+    -> FOREIGN KEY (codigoProducto) REFERENCES PRODUCTOS(codigoProducto) ON UPDATE CASCADE,
+    -> PRIMARY KEY (codigoPedido, codigoProducto)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> DROP TABLE IF EXISTS PAGOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE TABLE PAGOS(
+    -> codigoCliente INT AUTO_INCREMENT NOT NULL,
+    -> formaPago VARCHAR(40) NOT NULL,
+    -> idTransaccion VARCHAR(50) NOT NULL,
+    -> fechaPago DATE NOT NULL,
+    -> cantidad DECIMAL (15,2) NOT NULL,
+    -> PRIMARY KEY (codigoCliente,idTransaccion),
+    -> FOREIGN KEY (codigoCliente) REFERENCES CLIENTES(codigoCliente) ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> /*CLIENTES*/
+mysql> ALTER TABLE CLIENTES CHANGE telefono telefonoMovil VARCHAR(15) NOT NULL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CLIENTES ADD COLUMN telefonoFijo VARCHAR(15) NOT NULL AFTER TELEFONOMOVIL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CLIENTES CHANGE lineaDireccion1 direccion1 VARCHAR(50) NOT NULL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CLIENTES CHANGE lineaDireccion2 direccion2 VARCHAR(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CLIENTES ALTER pais SET DEFAULT "spain";
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CLIENTES ADD CONSTRAINT CONST_PAIS_CLIENT CHECK (pais IN ("SPAIN","USA","FRANCE","AUSTRALIA","UNITED KINGDOM"));
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> DROP INDEX IDX_TELEFONOMOVIL ON CLIENTES;
+ERROR 1091 (42000): Can't DROP 'IDX_TELEFONOMOVIL'; check that column/key exists
+mysql> CREATE INDEX IDX_TELEFONOMOVIL ON CLIENTES (telefonoMovil);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> DROP VIEW IF EXISTS V_CLIENTES;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE VIEW V_CLIENTES AS SELECT pais, nombreCliente, telefonoMovil FROM CLIENTES ORDER BY pais ASC;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> /*EMPLEADOS*/
+mysql> ALTER TABLE EMPLEADOS ADD COLUMN telefono VARCHAR(15) NOT NULL AFTER apellido2;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE EMPLEADOS ADD CONSTRAINT CONST_POS_EMPL CHECK (puesto IN("General Director","Deputy Director of Marketing","Deputy Director of Sales","Secretary","Sales Representative","Office Director"));
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> DROP VIEW IF EXISTS V_EMPLEADOS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE VIEW V_EMPLEADOS AS SELECT apellido1, apellido2, nombre, puesto FROM EMPLEADOS ORDER BY apellido1 ASC;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> /*OFICINAS*/
+mysql> ALTER TABLE OFICINAS CHANGE lineaDireccion1 direccion1 VARCHAR(50) NOT NULL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE OFICINAS CHANGE lineaDireccion2 direccion2 VARCHAR(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE OFICINAS ADD CONSTRAINT CONST_LOC_OFI CHECK (pais IN("Spain","USA","England","France","Australia","Japan"));
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DROP VIEW IF EXISTS V_OFICINAS;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE VIEW V_OFICINAS AS SELECT pais, telefono, direccion1 FROM OFICINAS ORDER BY pais ASC;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> /*RENAME TABLE GAMAPRODUCTOS*/
+mysql> ALTER TABLE GAMAPRODUCTOS RENAME TO GAMA;
+ERROR 1146 (42S02): Table 'jardipcl.gamaproductos' doesn't exist
+mysql> 
+mysql> /*USERS*/
+mysql> DROP USER IF EXISTS adminPCL;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE USER adminPCL IDENTIFIED BY "pableras";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all on JARDIPCL.* to adminPCL;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> DROP USER IF EXISTS PCL;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE USER PCL IDENTIFIED BY "1234";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT SELECT ON JARDIPCL .* TO PCL;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> ALTER TABLE EMPLEADOS ADD FOREIGN KEY (puesto) REFERENCES OFICINAS (codigoOficina);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE EMPLEADOS DROP FOREIGN KEY empleados_ibfk_3;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> notee;

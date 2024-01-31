@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html  id="top">
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pablo Coba</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+        <meta name="author" content="Pablo Coba Lodín">
+        <meta name="description" content="Portfolio de Pablo Coba Lodín">
+        <link rel="icon" type="image/png" href="img/logo/logoblack.png"/>
+        <link rel="preload" href="img/logo/logowhite.png" as="image" type="image/png">
+        <meta charset="utf-8">
+        <meta lang="es">
+    </head>
+    <body>
+        <nav class="topnav reveal">
+            <h2 class="pablocoba"><a href="#top">p<span class="coba">c</span><span class="blinkingdot">.</span></a></h2>
+            <ul class="flexboxnav">
+                <li><a href="#aboutme">Sobre mí</a></li>
+                <li><a href="#shop">Tienda</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section class="nombre">
+                <img class="logobig" src="./img/logo/logowhite.png">
+                <div class="sobrelogo">
+                    <h1>pablo <span class="coba">coba</span><span class="blinkingdot">.</span><p class="descripcionnombre" id="aboutme" >Desarrollador junior en formación. </p></h1>
+                    
+                </div>   
+            </section>
+            <article class="me">
+                <h2>SOBRE MÍ</h2>
+                <p class="descripcionpablo">
+                    ¡Bienvenidos a mi página web! Aquí podréis conocerme más a fondo.<br>
+    
+                    Mi nombre es Pablo y actualmente soy estudiante de DAW en el centro IES El Lago, en Madrid, España.
+                    Tengo 22 años y, al acabar el bachiller, comencé a estudiar Diseño y Desarrollo de Videojuegos en ESNE, con la aspiración de convertirme en artista de videojuegos, o algo relacionado, desgraciadamente, no me gustó y lo dejé. Ahora estoy muy ilusionado con empezar este grado y, de momento, tanto profesores como contenidos me están gustando más y parecen mucho más entretenidos y gratificantes. 
+                </p>
+                <img class="imagenpablo" src="./img/mix/pablo.jpg">   
+            </article>
+
+            <section  id="shop"class="flexboxshop">
+                <h2>TIENDA</h2>
+                <article>
+                    <img class="imgshop"src="img/mix/karajishi.jpg" alt="Karajishi">
+                    <dt>karajishi shirt</dt>
+                    <dd><small>hand printed original. €30</small></dd>
+                </article>
+
+                <article>
+                    <img class="imgshop"src="img/mix/calaveri.jpg" alt="Karajishi">
+                    <dt>skull shirt</dt>
+                    <dd><small>hand printed original. €30</small></dd>
+                </article>
+                <article>
+                    <img class="imgshop"src="img/mix/dragonana2.jpg" alt="Karajishi">
+                    <dt>dragon shirt</dt>
+                    <dd><small>hand printed original. €30</small></dd>
+                </article>
+            </section>
+
+            <section class="flexboxprojects">
+                <h2 id="projects">PROYECTOS</h2>
+                <article>
+                    <div>
+                        <h3>Página personal</h3>
+                        <p>Creada únicamente con HTML y CSS. Es mi primera página web.
+                            Tiene muchos fallos de sintaxis y semántica y no es muy responsive.
+                            Me sirvió para entender mejor los básicos de html y css.<br></br>
+                            Pulsa <a href="./paginas/Act02/index.html" target="_blank">aquí</a> para verla en pantalla completa.
+                        </p>
+                    </div>
+
+
+                    <iframe src="./paginas/Act02/index.html" ></iframe>
+                </article>
+                <article>
+                    <div>
+                        <h3>Floristería Paqui</h3>
+                        <p>Creada únicamente con HTML y CSS. Es mi segunda página web.
+                            Me fue útil para entender mejor los flexboxes, cómo usar varios htmls, crear formularios y mejorar en general en todos los aspectos.
+                            Aun así, no es muy responsive aún, y los flex están regular.
+                            <br>Está basada en la
+                            página <a href="https://floresmenta.com/24-enviar-flores-madrid?gad_source=1&gclid=EAIaIQobChMIkcb-j6GlggMVN4ZoCR22Pw9hEAAYASAAEgLxg_D_BwE" target="_blank">Menta y Canela</a>.
+                            <br>Pulsa <a href="./paginas/LM_UT2_A03_CobaPablo/index.html" target="_blank">aquí</a> para verla en pantalla completa.
+                        </p>
+                    </div>
+                    <iframe src="./paginas/LM_UT2_A03_CobaPablo/index.html" ></iframe>
+                </article>
+                <article>
+                    <div>
+                        <h3>Página personal 2 (Portfolio)</h3>
+                        <p>Creada únicamente con HTML y CSS. Es mi tercera página web.
+                            Con esta práctica entendí casi a la perfección los flexboxes y están mucho mejor usados que en su predecesora.
+                            La página es más responsive que antes. Además, experimenté un poco con algunas animaciones.
+
+                        </p>
+                    </div>
+                    <iframe src="./indexportfolio.html" ></iframe>
+                </article>
+
+
+            </section>
+    
+
+            <footer id="contact" class="footer">
+                <form class="form" action="/" method="post">
+                    <fieldset>
+                        <legend>Contacta conmigo</legend>
+                        <input class="forminput" type="text" name="name" placeholder="Nombre" required>
+                        <input class="forminput" type="email" name="email" placeholder="E-mail" required>
+                        <textarea class="formmsg" placeholder="Mensaje" required></textarea>
+                        <input class="formbutton" type="submit" value="Enviar mensaje">
+                        
+                    </fieldset>
+
+                </form>
+
+            </footer>
+        </main>
+
+    </body>
+</html>

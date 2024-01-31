@@ -1,0 +1,21 @@
+{"alumnos":[
+    {
+        "nombre": "Martín",
+        "apellidos": "Rodríguez Coy",
+        "fecha de nacimiento":"01/01/1999",
+        "DNI": "54454553-R", 
+        "nota": "7"
+    },
+    {
+        "nombre": "Emilia",
+        "apellidos": "López Sánchez",
+        "fecha de nacimiento":"10/09/2002",
+        "DNI": "54454554-S", 
+        "nota": "7"},
+    {
+        "nombre": "Naim",
+        "apellidos": "Abad García",
+        "fecha de nacimiento":"27/11/2001",
+        "DNI": "54454555-T", 
+        "nota": "5"}
+]}

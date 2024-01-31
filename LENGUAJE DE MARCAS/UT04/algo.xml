@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE correo SYSTEM "correo.dtd">
+
+<correo>
+<destinatarios>
+
+</destinatarios>
+<de>Olmo</de>
+<asunto>prueba</asunto>
+<mensaje>Hola, qué tal</mensaje>
+</correo>

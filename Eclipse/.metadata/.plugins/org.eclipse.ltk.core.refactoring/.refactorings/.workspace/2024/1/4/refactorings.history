@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;UT7_BRML_Funciones&apos;" deleteContents="true" description="Delete resource &apos;UT7_BRML_Funciones&apos;" element1="/UT7_BRML_Funciones" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1705998282884"/>
+</session>

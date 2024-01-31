@@ -1,0 +1,422 @@
+tee C:/Users/dawmi/Desktop/p/BBDD/UD4_PCL/UD04log_PCL.txt
+
+DROP DATABASE IF EXISTS BD04;
+CREATE DATABASE BD04;
+USE BD04;
+
+ALTER TABLE ALUMNADO DROP CONSTRAINT Cod_alum_PK;
+ALTER TABLE ALUMNADO DROP CONSTRAINT Cod_Curso_FK;
+ALTER TABLE CURSOS DROP CONSTRAINT Cod_Profe_FK;
+ALTER TABLE CURSOS DROP CONSTRAINT Cod_Curso_PK;
+ALTER TABLE PROFESORADO DROP CONSTRAINT Cod_Profe_PK;
+
+DROP TABLE IF EXISTS PROFESORADO;
+CREATE TABLE PROFESORADO
+( Codigo INT, 
+  Nombre VARCHAR(30), 
+  Apellidos VARCHAR(30), 
+  DNI VARCHAR(10), 
+  Especialidad VARCHAR(20),
+  Fecha_Nac DATE,
+  Antiguedad INT,
+  CONSTRAINT Cod_Profe_PK PRIMARY KEY (Codigo)
+);  
+DROP TABLE IF EXISTS CURSOS;
+CREATE TABLE CURSOS
+( Codigo INT, 
+  Nombre VARCHAR(20), 
+  Cod_Profe INT, 
+  Max_Alumn INT, 
+  Fecha_Inic DATE, 
+  Fecha_Fin DATE, 
+  Num_Horas INT,
+  CONSTRAINT Cod_Curso_PK PRIMARY KEY (Codigo),    
+  CONSTRAINT Cod_Profe_FK
+    FOREIGN KEY (Cod_Profe)
+    REFERENCES PROFESORADO(Codigo)
+);
+
+DROP TABLE IF EXISTS ALUMNADO_NUEVO;        
+CREATE TABLE ALUMNADO_NUEVO
+( Nombre VARCHAR(30), 
+  Apellidos VARCHAR(30), 
+  Sexo VARCHAR(1), 
+  Fecha_Nac DATE
+);
+
+DROP TABLE IF EXISTS ALUMNADO; 
+CREATE TABLE ALUMNADO
+( Codigo INT AUTO_INCREMENT, 
+  Nombre VARCHAR(30), 
+  Apellidos VARCHAR(30), 
+  Sexo VARCHAR(1), 
+  Fecha_Nac DATE, 
+  Cod_Curso INT,
+  CONSTRAINT Cod_alum_PK PRIMARY KEY (Codigo),    
+  CONSTRAINT Cod_Curso_FK
+    FOREIGN KEY (Cod_Curso)
+    REFERENCES CURSOS(Codigo)
+);
+    
+
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(1, 'Curso 1', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.') , GET_FORMAT(date,'EUR')),STR_TO_DATE(REPLACE('31/12/2001','/','.') , GET_FORMAT(date,'EUR')), 100);
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(2, 'Curso 2', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.'), GET_FORMAT(date, 'EUR')), STR_TO_DATE(REPLACE('31/12/2011','/','.'), GET_FORMAT(date,'EUR')), 100);
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(3, 'Curso 3', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.'), GET_FORMAT(date,'EUR')), STR_TO_DATE(REPLACE('31/12/2011','/','.'), GET_FORMAT(date,'EUR')), 100);
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(4, 'Curso 4', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.'), GET_FORMAT(date,'EUR')), STR_TO_DATE(REPLACE('31/12/2011','/','.'), GET_FORMAT(date,'EUR')), 100);
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(5, 'Curso 5', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.'), GET_FORMAT(date,'EUR')), STR_TO_DATE(REPLACE('31/12/2011','/','.'), GET_FORMAT(date,'EUR')), 100);
+INSERT INTO CURSOS (Codigo, Nombre, Max_Alumn, Fecha_Inic, Fecha_Fin, Num_Horas) VALUES 
+(6, 'Curso 6', 30, STR_TO_DATE(REPLACE('01/01/2011','/','.'), GET_FORMAT(date,'EUR')), STR_TO_DATE(REPLACE('31/12/2011','/','.'), GET_FORMAT(date,'EUR')), 100);
+
+    
+    
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL, 'MANUELA','SUAREZ IBAÑEZ','M',STR_TO_DATE(REPLACE('30/6/1990','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MILAGROSA','DIAZ PEREZ','M',STR_TO_DATE(REPLACE('28/10/1984','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE','CRESPO DE HERMOSO','H',STR_TO_DATE(REPLACE('2/3/1993','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANTONIO JESUS','MARTIN BOLLO','H',STR_TO_DATE(REPLACE('4/11/1999','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'BARBARA','PELAEZ VALENCIA','M',STR_TO_DATE(REPLACE('27/8/1967','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN PEDRO','GALVE GONZALEZ','H',STR_TO_DATE(REPLACE('10/11/1991','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA ISABEL','PEREZ GUILLEN','M',STR_TO_DATE(REPLACE('14/11/1962','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'PATRICIA','ROMAN GOMEZ','M',STR_TO_DATE(REPLACE('26/4/1979','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','TAPIA SOLANS','H',STR_TO_DATE(REPLACE('5/6/1980','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA','FERREIRO SANTOS','M',STR_TO_DATE(REPLACE('29/1/1969','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JAVIER','LAMA DEL REY','H',STR_TO_DATE(REPLACE('26/2/1977','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ALEJANDRA','CALDERON VALDIVIA','M',STR_TO_DATE(REPLACE('16/11/1960','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANA DOLORES','ESCUDERO ENCISO','M',STR_TO_DATE(REPLACE('7/9/1975','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN CARLOS','RODRIGUEZ PADILLA','H',STR_TO_DATE(REPLACE('15/11/1963','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'CECILIO','SASTRE GONZALEZ','H',STR_TO_DATE(REPLACE('23/11/1969','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN','MARTINEZ SANCHEZ','H',STR_TO_DATE(REPLACE('23/10/1974','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA','LAFUENTE FERNANDEZ','M',STR_TO_DATE(REPLACE('21/11/1986','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MANUELA','MARTINEZ ALBA','M',STR_TO_DATE(REPLACE('26/11/1962','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ROSA NIEVES','SANCHEZ CANO','M',STR_TO_DATE(REPLACE('12/12/1979','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'BELEN','RAMOS ANGUITA','M',STR_TO_DATE(REPLACE('30/12/1967','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JULIAN','GARCIA ZABALA','H',STR_TO_DATE(REPLACE('4/1/1963','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DIEGO JESUS','CANO SALVADOR','H',STR_TO_DATE(REPLACE('18/5/1970','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE IGNACIO','HARO FANECA','H',STR_TO_DATE(REPLACE('8/5/1981','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSEFA','CASTELLANOS DIEZ','M',STR_TO_DATE(REPLACE('1/5/1998','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'BEATRIZ','RUBIO BERMEJO','M',STR_TO_DATE(REPLACE('29/4/1970','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JAVIER','CASTRO GOMEZ','H',STR_TO_DATE(REPLACE('20/8/1967','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','GAY GARCIA DEL VALLE','H',STR_TO_DATE(REPLACE('22/7/1989','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','TOCADOS GARCIA','H',STR_TO_DATE(REPLACE('18/1/1961','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ELISA ISABEL','BRUNO CALVO','M',STR_TO_DATE(REPLACE('13/5/1998','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DIANA','GUILLAMON POSADA','M',STR_TO_DATE(REPLACE('29/4/1980','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','RANILLA URRUTIA','H',STR_TO_DATE(REPLACE('22/11/1964','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JAVIER','LUENGO HERRERO','H',STR_TO_DATE(REPLACE('22/4/1963','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','VALENCIA MEDINA','H',STR_TO_DATE(REPLACE('27/3/1981','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'RAFAEL','DIAZ LAMA','H',STR_TO_DATE(REPLACE('1/6/1979','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'CAROLINA','RIVAS MENDIA','M',STR_TO_DATE(REPLACE('30/7/1974','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE MANUEL','GARCIA ZAPICO','H',STR_TO_DATE(REPLACE('3/3/1963','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MIGUEL','IBARROLA DIEZ','H',STR_TO_DATE(REPLACE('12/8/1985','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ENCARNACION','ASENJO HERNANDO','M',STR_TO_DATE(REPLACE('3/4/1962','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'FRANCISCO','CALVO BONO','H',STR_TO_DATE(REPLACE('17/6/1974','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE ANTONIO','CALVO RODRIGUEZ','H',STR_TO_DATE(REPLACE('4/5/1989','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANTONIA','MORENO RAYA','M',STR_TO_DATE(REPLACE('4/8/1976','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE MARIA','FUENTEMILLA ALBERT','H',STR_TO_DATE(REPLACE('27/12/1979','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'BELEN','PORTERO GRACIA','M',STR_TO_DATE(REPLACE('28/10/1991','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'LUIS ANTONIO','SUAREZ GARCIA','H',STR_TO_DATE(REPLACE('24/10/1997','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'FRANCISCO ANTONIO','BAUTISTA LAMENCA','H',STR_TO_DATE(REPLACE('9/9/1992','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'SILVIA','PEÑA CASTAN','M',STR_TO_DATE(REPLACE('20/7/1977','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'CARMEN','KAAMOUCHI VICENTE','M',STR_TO_DATE(REPLACE('31/5/1990','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA','LASTRA MOLINA','M',STR_TO_DATE(REPLACE('29/9/1961','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ROCIO EMILIA','IZQUIERDO BELTRAN','M',STR_TO_DATE(REPLACE('1/4/1981','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'OSCAR','DIEZ NAVARRO','H',STR_TO_DATE(REPLACE('17/6/1972','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JULIAN ANDRES','MORALES RIERA','H',STR_TO_DATE(REPLACE('31/12/1998','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MUJERES','ALCALA PEREZ','M',STR_TO_DATE(REPLACE('11/10/1970','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE ANTONIO','GONZALEZ ROY','H',STR_TO_DATE(REPLACE('19/6/1965','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSEFA','GOMEZ EGIDO','M',STR_TO_DATE(REPLACE('27/9/1998','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MYRIAM','MORALES ISAC','M',STR_TO_DATE(REPLACE('15/9/1984','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'EDURNE','MARTINEZ LASTRA','M',STR_TO_DATE(REPLACE('25/1/1976','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN JOSE','RIVAS RAMON','H',STR_TO_DATE(REPLACE('1/5/1994','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DANIEL JOSE','BLANCO IZQUIERDO','H',STR_TO_DATE(REPLACE('5/2/1982','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MIRIAN','MONTERO LAMENCA','M',STR_TO_DATE(REPLACE('6/5/1972','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA PAZ','BERTIZ SARMIENTO','M',STR_TO_DATE(REPLACE('1/4/1997','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'EMILIO','MORILLO RAMON','H',STR_TO_DATE(REPLACE('5/9/1986','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ENRIQUE','FERNANDEZ DIEZ','H',STR_TO_DATE(REPLACE('6/10/1972','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANA TERESA','CASADO CRESPO','M',STR_TO_DATE(REPLACE('13/1/1971','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JOSE IGNACIO','MARTIN BERDUN','H',STR_TO_DATE(REPLACE('18/8/1987','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','PADILLA ORTEGA','H',STR_TO_DATE(REPLACE('29/8/1960','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MIGUEL','GARCIA LARRETA','H',STR_TO_DATE(REPLACE('4/2/1982','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'LUIS MIGUEL','NAVARRO URRUTIA','H',STR_TO_DATE(REPLACE('20/4/1969','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'NURIA','AMOSTEGUI LUZURIAGA','M',STR_TO_DATE(REPLACE('25/10/1973','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANA MARIA','SANDE LAMENCA','M',STR_TO_DATE(REPLACE('31/10/1999','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'LEON JOSE','SARMIENTO RIVAS','H',STR_TO_DATE(REPLACE('11/4/1969','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'VICTOR','GARCIA GARCÍA','H',STR_TO_DATE(REPLACE('29/12/1999','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'NATALIA','TIMON ECHEPARE','M',STR_TO_DATE(REPLACE('19/1/1986','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MELANIE','CAMPOY GOMEZ','M',STR_TO_DATE(REPLACE('24/2/1967','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'RAMIRO','LLOBREGAT ALONSO','H',STR_TO_DATE(REPLACE('14/5/1984','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JULIAN','JIMENO DIEZ','H',STR_TO_DATE(REPLACE('27/2/1976','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ISABEL','SORIANO MATAMOROS','M',STR_TO_DATE(REPLACE('7/7/1995','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MIGUEL','SANCHEZ SANCHEZ','H',STR_TO_DATE(REPLACE('6/2/1998','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'NOEMI','BERRUEZO REQUENA','M',STR_TO_DATE(REPLACE('25/11/1973','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'IVAN ANGEL DE LA','GARCIA RUBIO','H',STR_TO_DATE(REPLACE('26/3/1979','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'LUTGARDA','GOÑI TIMON','M',STR_TO_DATE(REPLACE('17/10/1974','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA JESUS','RECOVER AGUILERA','M',STR_TO_DATE(REPLACE('20/3/1984','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA SOLEDAD','MORILLAS GUILLEN','M',STR_TO_DATE(REPLACE('30/4/1975','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN MANUEL','MARTIN ALEJANO','H',STR_TO_DATE(REPLACE('16/9/1980','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA DEL MAR','CASTRO CRUZ','M',STR_TO_DATE(REPLACE('8/11/1977','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MARIA ISABEL','ECHAGUE GONZALEZ','M',STR_TO_DATE(REPLACE('30/3/1998','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'JUAN','TALEGON CORTES','H',STR_TO_DATE(REPLACE('12/7/1966','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'MIGUEL','ARAGUAS DE LA TORRE','H',STR_TO_DATE(REPLACE('12/8/1998','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'DAVID','ALONSO GIMENEZ','H',STR_TO_DATE(REPLACE('2/9/1995','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'NICOLAS','BLANCO GONZALEZ','H',STR_TO_DATE(REPLACE('8/3/1992','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ALBERTO','VEGA GARCIA','H',STR_TO_DATE(REPLACE('29/8/1976','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'EVA MARIA','FENOY ORDOÑEZ','M',STR_TO_DATE(REPLACE('4/12/1989','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANA M.','GUERRERO LANZA','M',STR_TO_DATE(REPLACE('5/11/1963','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ANA MARIA','FERREIRO DIEZ','M',STR_TO_DATE(REPLACE('1/7/1999','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ARTURO','REVIRIEGO CERVANTES','H',STR_TO_DATE(REPLACE('2/8/1964','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'ALEJANDRO','CANO MORALES','H',STR_TO_DATE(REPLACE('13/5/1960','/','.'), GET_FORMAT(date,'EUR')),1);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'AZUCENA','BERENGUEL ROY','M',STR_TO_DATE(REPLACE('27/5/1998','/','.'), GET_FORMAT(date,'EUR')),4);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'PAZ DE','GARRALDA ARIAS','M',STR_TO_DATE(REPLACE('6/9/1972','/','.'), GET_FORMAT(date,'EUR')),3);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'PABLO CESAR','URBISTONDO GONZALEZ','H',STR_TO_DATE(REPLACE('12/2/1991','/','.'), GET_FORMAT(date,'EUR')),2);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'OSCAR','MARTIN GALINDO','H',STR_TO_DATE(REPLACE('3/8/1992','/','.'), GET_FORMAT(date,'EUR')),5);
+INSERT INTO ALUMNADO (Codigo,Nombre,Apellidos,Sexo,Fecha_Nac,Cod_Curso) VALUES 
+(NULL,'LUIS','MOLINA TAGARRO','H',STR_TO_DATE(REPLACE('16/1/1996','/','.'), GET_FORMAT(date,'EUR')),4);
+
+
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MARIA','GOMEZ ANDRES','M',STR_TO_DATE(REPLACE('4/5/1985','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('JOSE MANUEL','PADILLA VEGAS','H',STR_TO_DATE(REPLACE('19/5/1999','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('RICARDO','MARQUINA HERNANDO','H',STR_TO_DATE(REPLACE('20/2/1982','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MIGUEL','DIAZ FABRE','H',STR_TO_DATE(REPLACE('17/4/1985','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('LUIS MIGUEL','AGURRUZA RODRIGUEZ','H',STR_TO_DATE(REPLACE('25/4/1983','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('NICOLAS','LOBATO BARRANCO','H',STR_TO_DATE(REPLACE('25/6/1961','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MIGUEL','BURGOS ZAPICO','H',STR_TO_DATE(REPLACE('13/4/1986','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('JOSE JESUS','VALDIVIESO JIMENEZ','H',STR_TO_DATE(REPLACE('23/12/1985','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ANA MARIA','BEAMONTE GOMEZ','M',STR_TO_DATE(REPLACE('25/7/1968','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MARIA','LOPEZ CARREÑO','M',STR_TO_DATE(REPLACE('18/11/1963','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MARIA DEL MAR','ASENSIO SEGURA','M',STR_TO_DATE(REPLACE('21/5/1984','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ROSA NIEVES','LARRAÑETA LAZARO','M',STR_TO_DATE(REPLACE('10/6/1976','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ELENA','DAZA FANECA','M',STR_TO_DATE(REPLACE('18/9/1960','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('GEMA','PASTOR ADELL','M',STR_TO_DATE(REPLACE('13/2/1983','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MARIA CARMEN','CHECA CANO','M',STR_TO_DATE(REPLACE('11/8/1960','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('JOSE ANTONIO','GRACIA GONZALEZ','H',STR_TO_DATE(REPLACE('28/11/1962','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('AMALIA','GIL PER','M',STR_TO_DATE(REPLACE('10/1/1965','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('VICTOR','RAMON GARCIA','H',STR_TO_DATE(REPLACE('24/8/1991','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ESPERANZA VICTORIA','PANIZO DEL AGUILA','M',STR_TO_DATE(REPLACE('7/12/1972','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ANTONIO','ALONSO SORIANO','H',STR_TO_DATE(REPLACE('15/6/1985','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('JAVIER','BOTAZ HERNÁNDEZ','H',STR_TO_DATE(REPLACE('31/3/1999','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('FRANCISCO','CUTILLAS HERNANDEZ','H',STR_TO_DATE(REPLACE('30/3/1982','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('EDUARDO','LOPEZ RODRIGUEZ','H',STR_TO_DATE(REPLACE('20/11/1964','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ADOLFO','LOPEZ EL AAKROUTI','H',STR_TO_DATE(REPLACE('16/10/1987','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MARIA ROSA','MORA BAUTISTA','M',STR_TO_DATE(REPLACE('20/4/1969','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('GONZALO','IBAÑEZ PALENCIA','H',STR_TO_DATE(REPLACE('21/12/1965','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ANA M.','DIEZ IZQUIERDO','M',STR_TO_DATE(REPLACE('7/10/1976','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('ALICIA MARIA','DIAZ GUERRERO','M',STR_TO_DATE(REPLACE('27/8/1968','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('MONTSERRAT','VELA SASTRE','M',STR_TO_DATE(REPLACE('29/1/1980','/','.'), GET_FORMAT(date,'EUR')));
+INSERT INTO ALUMNADO_NUEVO (Nombre,Apellidos,Sexo,Fecha_Nac) VALUES 
+('LUIS','BERMEJO GARCIA','H',STR_TO_DATE(REPLACE('7/11/1984','/','.'), GET_FORMAT(date,'EUR')));
+
+/*Inserts a new record into the  TEACHER table  . The data must be the following:
+Codigo: 1
+Nombre: nuria
+Apellidos: ANERO GONZALEZ
+DNI: 58328033X
+Especialidad: MATEMATICAS
+Fecha_Nac: 22/02/1972
+Antiguedad: 9*/
+
+INSERT INTO PROFESORADO (Codigo, Nombre, Apellidos, DNI, Especialidad, Fecha_Nac, Antiguedad) VALUES
+(1, 'NURIA', 'ANERO GONZALEZ', '58328033X', 'MATEMATICAS', 19720222, 9);
+
+/*Insert several more records into the  TEACHER table  using SQL statements. . The data must be the following:
+Data that appears blank should not be used in statements.
+*/
+
+INSERT INTO PROFESORADO (Codigo, Nombre, Apellidos, DNI, Especialidad, Fecha_Nac, Antiguedad) VALUES
+(2, 'MARIA LUISA', 'FABRE BERDUN', '51083099F', 'TECNOLOGIA', 19750331, 4);
+INSERT INTO PROFESORADO (Codigo, Nombre, Apellidos, DNI, Especialidad, Fecha_Nac, Antiguedad) VALUES
+(3, 'JAVIER', 'JIMENEZ HERNANDO', NULL, 'LENGUA', 19690504, 10);
+INSERT INTO PROFESORADO (Codigo, Nombre, Apellidos, DNI, Especialidad, Fecha_Nac, Antiguedad) VALUES
+(4, 'ESTEFANIA', 'FERNANDEZ MARTINEZ', '19964324W', 'INGLES', 19730622, 5);
+INSERT INTO PROFESORADO (Codigo, Nombre, Apellidos, DNI, Especialidad, Fecha_Nac, Antiguedad) VALUES
+(5, 'JOSE M.', 'ANERO PAYAN', NULL, NULL, NULL, NULL);
+
+/*Modify the records in the COURSES table to assign a teacher to each course. . The teaching staff that you must assign to each course is:
+*/
+
+UPDATE CURSOS
+SET Cod_Profe = 4
+WHERE Codigo = 1;
+
+UPDATE CURSOS
+SET Cod_Profe = 2
+WHERE Codigo = 2;
+
+UPDATE CURSOS
+SET Cod_Profe = 2
+WHERE Codigo = 3;
+
+UPDATE CURSOS
+SET Cod_Profe = 1
+WHERE Codigo = 4;
+
+UPDATE CURSOS
+SET Cod_Profe = 1
+WHERE Codigo = 5;
+
+UPDATE CURSOS
+SET Cod_Profe = 3
+WHERE Codigo = 6;
+
+/*5.Modify the record of the teacher "ESTEFANIA", using SQL statements  , and change her date of birth to "06/22/1974" and seniority to 4.  */
+UPDATE PROFESORADO
+SET Fecha_Nac = 19740622, Antiguedad = 4
+WHERE CODIGO = 4;
+
+/*6. Modify the seniority of all teachers by incrementing them by 1 in all records.  */
+UPDATE profesorado
+SET Antiguedad = ANTIGUEDAD+1;
+
+/*7. Delete, from the  COURSES table , the course record that has code 6. */
+
+DELETE FROM CURSOS 
+WHERE Codigo = 6;
+
+/*8. Delete, from the  STUDENT table , those records associated with the course with code 3. */
+DELETE FROM ALUMNADO 
+WHERE Cod_Curso = 3;
+
+/*9. Inserts the records from the  ALUMNADO_NUEVO table  into the  ALUMNADO table . You must do it using a single SQL statement. .*/
+INSERT INTO ALUMNADO (NOMBRE, APELLIDOS, SEXO, FECHA_NAC) SELECT NOMBRE, APELLIDOS, SEXO, FECHA_NAC FROM ALUMNADO_NUEVO;
+
+/*10. In the  COURSES table , update the  Max_Student field  of the course record with code 2, assigning it the value corresponding to the total number of male and female students in the  STUDENTS table  who have been assigned that same course.*/
+UPDATE CURSOS
+SET Max_Alumn = (SELECT count(codigo) from ALUMNADO where cod_curso = 2)
+WHERE Codigo = 2;
+
+/*11. Delete from the  STUDENTS table  all the records associated with the courses taught by the teacher whose name is "NURIA".*/
+DELETE FROM ALUMNADO
+WHERE Cod_Curso in (SELECT codigo from cursos where cod_profe in (select codigo from profesorado where nombre = "nuria"));
+
+notee;

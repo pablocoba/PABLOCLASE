@@ -1,0 +1,54 @@
+
+#cuad{
+    height:0px;
+    width:0px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    justify-self:center;
+}
+
+h2{
+    display:block;
+    text-align:center;
+    visibility:hidden;
+}
+button{
+    margin-left:20px;
+    margin-top:20px;
+    width: 120px; 
+    padding:15px;
+    background-color:rgb(255, 255, 255);
+    background-color:rgb(185, 173, 173);
+    color:rgb(27, 27, 27);
+    border-style:none;
+    border-radius:4px;
+    text-align:center;
+    font-weight: 600;
+    font-size:14px;
+}
+button:hover{
+    background-color:rgb(233, 220, 220);
+}
+p{
+    margin-left:20px;
+    font-weight:bold;
+}
+.cont{
+    position:relative;
+    margin-left:200px;
+    margin-top:30px;
+    margin-right:200px;
+    position:relative;
+    display:grid;
+    justify-content:center;
+    flex-wrap:wrap;
+    flex-direction:column;
+}
+.contmini{
+    justify-content:center;
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+}

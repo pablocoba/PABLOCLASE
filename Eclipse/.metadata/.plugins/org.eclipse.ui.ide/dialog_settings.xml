@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="true"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value=""/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="C:\Users\dawmi\Downloads\UT10_Teoria.zip"/>
+			<item value="C:\Users\dawmi\Downloads\UT6 RFA_Clases.zip"/>
+			<item value="C:\Users\dawmi\Downloads\UT8PROG_Teoria.zip"/>
+			<item value="C:\Users\dawmi\Downloads\UT7_BRML_Funciones.zip"/>
+			<item value="C:\Users\dawmi\Desktop\p\exportaciones eclipse\eclipse2.zip"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.jdt.ui.java"/>
+		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
+</section>

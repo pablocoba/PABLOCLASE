@@ -1,0 +1,35 @@
+package ejercicio4;
+
+import java.text.DecimalFormat;
+import ejercicio3.Terminal;
+
+public class Movil extends Terminal{
+	
+	private double costePorMin;
+	
+	public DecimalFormat formateador = new DecimalFormat();
+
+	//TODO entender como cóño funcionan los enums
+	public Movil(String tlf, String tarifa) {
+		super(tlf);
+		if(tarifa == "rata") {
+			costePorMinuto = costePorMin + (segundos/60*6/100);
+		}
+
+
+
+	}
+	@Override
+	public void llama(Terminal t, int segundos) {
+		if(tar.getTipo() == "rata") {
+			costePorMin = costePorMin + (segundos/60*6/100);
+		}
+	}
+	@Override
+	public String toString() {
+		return "Nº "+tlf +" - "+segundos+"s de conversación - tarificados " + formateador.format(segundos);
+		
+	}
+	
+
+}
