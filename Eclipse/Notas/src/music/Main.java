@@ -1,4 +1,5 @@
 package music;
+import java.util.Random;
 import java.util.Scanner;
 public class Main {
 
@@ -8,11 +9,15 @@ public class Main {
 		Scanner teclado = new Scanner(System.in);
 		Nota nota = new Nota();
 		menu(teclado, nota, num);
+		teclado.close();
 	}
 
 	private static void menu(Scanner teclado, Nota nota, int num) {
 		int opc = 2;
-		while(opc != 3) {
+		
+		
+		
+		while(opc != 5) {
 			switch (opc) {
 			case 2:
 
@@ -46,10 +51,23 @@ public class Main {
 				num = 20;
 				break;
 			case 3:
+				nota.generarNota();
+				
+				nota.generarCuerda();
+				System.out.println(nota.getCuerda() + " - " + nota);
+
+				break;
+			case 4:
+				nota.generarNotaBemol();
+				System.out.println(nota);
+				break;
+			case 5:
+				break;
+			default:
 				break;
 			}
 			
-		}while(num != 3 && num != 20);
+		}while(num != 5 && num != 20);
 		
 		return num;
 	}
@@ -68,10 +86,24 @@ public class Main {
 				num = 2;
 				break;
 			case 3:
+				nota.generarNota();
+
+				nota.generarCuerda();
+				System.out.println(nota.getCuerda() + " - " + nota);
+
 				break;
+			case 4:
+				nota.generarNotaBemol();
+				System.out.println(nota);
+				break;
+			case 5:
+				break;
+			default:
+				break;
+				
 			}
 			
-		}while(num != 3 && num != 2);
+		}while(num != 5 && num != 2);
 		return num;
 	}
 
@@ -79,7 +111,9 @@ public class Main {
 		System.out.println("Selecciona una opción: ");
 		System.out.println("1. Nueva nota ");
 		System.out.println("2. Silenciar menú");
-		System.out.println("3. Salir");
+		System.out.println("3. Nueva nota + cuerda");
+		System.out.println("4. Nueva nota (posibilidad de b y #)");
+		System.out.println("5. Salir");
 	}
 
 	private static void hideMenu() {
