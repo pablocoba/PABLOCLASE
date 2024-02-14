@@ -8,6 +8,7 @@
 			<item value=""/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="C:\Users\dawmi\Downloads\ActividadUD04 (5).zip"/>
 			<item value="C:\Users\dawmi\Downloads\Proyecto_UT7_JQS.zip"/>
 			<item value="C:\Users\dawmi\Downloads\G2J.zip"/>
 			<item value="C:\Users\dawmi\Downloads\UT10_Teoria.zip"/>
@@ -25,5 +26,13 @@
 		</list>
 	</section>
 	<section name="BasicNewProjectResourceWizard">
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="652"/>
+		<item key="DIALOG_Y_ORIGIN" value="230"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
 	</section>
 </section>
