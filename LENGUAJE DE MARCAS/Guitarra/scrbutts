@@ -1,0 +1,10 @@
+function moreScroll(){
+    if(scrollerID = startScroll() & speed !=1){
+        speed = speed-1;
+    }
+}
+function lessScroll(){
+    if(scrollerID = startScroll() & speed !=1){
+        speed = speed-1;
+    }
+}
