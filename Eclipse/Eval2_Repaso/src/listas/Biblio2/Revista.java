@@ -1,6 +1,7 @@
-package listas.Biblioteca;
+package listas.Biblio2;
 
 public class Revista extends Publicacion{
+	
 	private int numero;
 	
 	public Revista(String ISBN, String titulo, int anoPublicacion, int numero) {
@@ -16,7 +17,7 @@ public class Revista extends Publicacion{
 		this.numero = numero;
 	}
 	
-	public String toString(){
-		return "ISBN: "+getISBN() + ", título: " + getTitulo() + ", año de publicación: 1995, número: " + numero; 
+	public String toString() {
+		 return "ISBN: "+ISBN+", título: " + titulo + ", año de publicacion: "+ anoPublicacion + ", prestado: "  + numero+"\n";
 	}
 }
